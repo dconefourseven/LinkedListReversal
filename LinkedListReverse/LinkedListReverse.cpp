@@ -17,6 +17,24 @@ public:
     {
         ListNode* newHead = head;
 
+        if (newHead == NULL)
+        {
+            return NULL;
+        }
+
+        ListNode* lastNode = NULL;
+        ListNode* nextNode = newHead;
+        while (nextNode != NULL)
+        {
+            newHead = nextNode;
+
+            lastNode = newHead->prev;
+            nextNode = newHead->next;
+
+            newHead->next = lastNode;
+            newHead->prev = nextNode;
+        }
+
         return newHead;
     }
 
@@ -47,13 +65,25 @@ int main()
         last = curr;
     }
 
-    ListNode* temp = head;
-    while (temp != NULL)
     {
-        std::cout << temp->data << std::endl;
-        temp = temp->next;
+        ListNode* temp = head;
+        while (temp != NULL)
+        {
+            std::cout << temp->data << std::endl;
+            temp = temp->next;
+        }
+        std::cout << "Done printing" << std::endl;
     }
-    std::cout << "Done printing" << std::endl;
+
+    {
+        ListNode* reverseTemp = ListNode::ReverseList(head);
+        while (reverseTemp != NULL)
+        {
+            std::cout << reverseTemp->data << std::endl;
+            reverseTemp = reverseTemp->next;
+        }
+        std::cout << "Done printing reverse" << std::endl;
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
